@@ -85,4 +85,15 @@ final class LedgerTests: XCTestCase {
 
         XCTAssertEqual(TimeLedger.balance(for: [spending, earning]), 30, accuracy: 0.001)
     }
+
+    func testCrossingFromPositiveBalanceToZeroTriggersAlert() {
+        XCTAssertTrue(TimeLedger.crossedZero(from: 1, to: 0))
+        XCTAssertTrue(TimeLedger.crossedZero(from: 1, to: -1))
+    }
+
+    func testRemainingAtOrBelowZeroDoesNotRepeatAlert() {
+        XCTAssertFalse(TimeLedger.crossedZero(from: 0, to: -1))
+        XCTAssertFalse(TimeLedger.crossedZero(from: -1, to: -2))
+        XCTAssertFalse(TimeLedger.crossedZero(from: 2, to: 1))
+    }
 }

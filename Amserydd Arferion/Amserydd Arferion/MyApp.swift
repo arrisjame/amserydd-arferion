@@ -5,6 +5,10 @@ import SwiftUI
 struct AmseryddArferionApp: App {
     @State private var timerCoordinator = TimerCoordinator()
 
+    init() {
+        TimeBankAlertService.shared.configure()
+    }
+
     var body: some Scene {
         WindowGroup {
             ContentView()

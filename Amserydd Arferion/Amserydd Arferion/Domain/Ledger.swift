@@ -91,6 +91,13 @@ public enum TimeLedger {
         evaluate(records).last?.balanceAfter ?? 0
     }
 
+    public static func crossedZero(
+        from previousBalance: TimeInterval,
+        to currentBalance: TimeInterval
+    ) -> Bool {
+        previousBalance > 0 && currentBalance <= 0
+    }
+
     private static func earningCredit(
         normalCredit: TimeInterval,
         startingBalance: TimeInterval,
